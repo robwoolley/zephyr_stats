@@ -1,0 +1,5 @@
+RESULTS_REPO_PATH=/data/test_results
+RESULTS_REPO_URL=https://github.com/zephyrproject-rtos/test_results
+ZEPHYR_REPO_PATH=/data/zephyr
+ZEPHYR_REPO_URL=https://github.com/zephyrproject-rtos/zephyr.git
+INFLUX_DB=influxdb://localhost:8086/zephyr_test_results

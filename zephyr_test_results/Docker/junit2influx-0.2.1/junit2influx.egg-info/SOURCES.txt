@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+setup.cfg
+setup.py
+junit2influx/__init__.py
+junit2influx/cli.py
+junit2influx/client.py
+junit2influx/xunitparser.py
+junit2influx.egg-info/PKG-INFO
+junit2influx.egg-info/SOURCES.txt
+junit2influx.egg-info/dependency_links.txt
+junit2influx.egg-info/entry_points.txt
+junit2influx.egg-info/requires.txt
+junit2influx.egg-info/top_level.txt
+junit2influx.egg-info/zip-safe

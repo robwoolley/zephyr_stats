@@ -1,0 +1,92 @@
+Metadata-Version: 1.1
+Name: junit2influx
+Version: 0.2.1
+Summary: "Send junit data to influxdb"
+Home-page: UNKNOWN
+Author: Eliot Berriot
+Author-email: eliot.berriot@people-doc.com
+License: MIT
+Description-Content-Type: UNKNOWN
+Description: junit2influx
+        ============
+        
+        This library provide some utilities to manipulate test data from junit files
+        and sendthem to a influxdb server.
+        
+        
+        Installation
+        ------------
+        
+        .. code-block:: bash
+        
+            pip install junit2influx
+        
+        
+        Usage
+        -----
+        
+        A ``junit2influx`` binary is available, as shown below:
+        
+        .. code-block:: bash
+        
+            $ junit2influx --help
+        
+            Usage: junit2influx [OPTIONS] JUNIT_FILE
+        
+            Extract test data from a junit file and send it to influxdb:
+        
+                junit2influx test.xml --influxdb-url url
+        
+            Each test is send as a single datapoint with its result and
+            duration under the "tests" measurement, and overall data
+            (number of tests, total duration, etc.) is sent under
+            the "builds" measurement.
+        
+            You can provide additional tags and fields to be sent with
+            each datapoint to influxdb by using the --field and --tag
+            flags:
+        
+                junit2influx test.xml --influxdb-url url --tag host=myhost --field commit=dh876d0
+        
+            All additional tags and fields are sent as string by default, but
+            you can cast them to specific json types (bool, float and int) if needed:
+        
+                --tag int:stage=1      # add an integer "stage" tag with a value of 1
+                --tag bool:fake=true   # add a boolean "fake" tag with a value of True
+                --field float:dur=3.5  # add a float "dur" field with a value of 3.5
+        
+            Multiple --field and --tag flags can be provided.
+        
+        
+        If you want to send data to influx but don't have a Junit file available, you
+        can use the ``push2influx`` wrapper:
+        
+        .. code-block:: bash
+        
+            $ push2influx --help
+                                                                 ✘
+            Usage: push2influx [OPTIONS] MEASUREMENT
+        
+            Push data directly to influxdb:
+        
+              push2influx measurement_name --influxdb-url url --tag result=success
+        
+            Tags and fields work the same way the do for junit2influx
+        
+            Options:
+            --field TEXT
+            --tag TEXT
+            --influxdb-url TEXT  [required]
+            --help               Show this message and exit.
+        
+Keywords: code,monitoring,tests,database,xml
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5

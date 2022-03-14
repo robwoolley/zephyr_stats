@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # namespace: monitoring
+  labels:
+    app: influxdb
+  name: influxdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influxdb
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec:
+      containers:
+        - name: influxdb
+          env:
+          - name: INFLUXDB_DB
+            valueFrom:
+              configMapKeyRef:
+                name: influxdb-configmap
+                key: influxdb-dbname
+          envFrom:
+          - secretRef:
+              name: influxdb-creds
+          image: docker.io/influxdb:1.8
+          resources:
+            limits:
+              cpu: 500m
+              memory: 500Mi
+          volumeMounts:
+          - mountPath: /var/lib/influxdb
+            name: var-lib-influxdb
+          # - mountPath: /etc/influxdb
+          #   name: config-volume
+      volumes:
+      - name: var-lib-influxdb
+        persistentVolumeClaim:
+          claimName: influxdb-pvc
+        

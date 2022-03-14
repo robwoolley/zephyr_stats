@@ -1,0 +1,37 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: zephyrfootprint
+  labels:
+    app: zephyr
+spec:
+  template:
+    spec:
+      containers:
+        - name: zephyr
+          image: zephyr_footprint_tracking:latest
+          env:
+          - name: FOOTPRINT_REPO_URL
+            value: https://github.com/robwoolley/footprint_tracking
+          - name: ZEPHYR_REPO_URL
+            value: https://github.com/zephyrproject-rtos/zephyr.git
+          resources:
+            limits:
+              cpu: 500m
+              memory: 500Mi
+          imagePullPolicy: Never
+          volumeMounts:
+          - mountPath: /data/zephyr
+            name: data-zephyr
+          - mountPath: /data/footprint_data
+            name: data-footprint
+      restartPolicy: Never
+      volumes:
+      - name: data-zephyr
+        persistentVolumeClaim:
+          claimName: zephyr-pvc
+      - name: data-footprint
+        persistentVolumeClaim:
+          claimName: footprint-pvc
+  backoffLimit: 1

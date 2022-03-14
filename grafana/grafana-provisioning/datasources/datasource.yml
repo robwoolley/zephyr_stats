@@ -1,0 +1,11 @@
+apiVersion: 1
+datasources:
+  - name: zephyr_test_results
+    type: influxdb
+    access: proxy
+    database: zephyr_test_results
+    user: admin
+    password: admin
+    url: http://influxdb:8086
+    isDefault: true
+    editable: true

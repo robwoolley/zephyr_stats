@@ -1,0 +1,37 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: zephyrtestresults
+  labels:
+    app: zephyr
+spec:
+  template:
+    spec:
+      containers:
+        - name: zephyr
+          image: zephyr_test_results:latest
+          env:
+          - name: RESULTS_REPO_URL
+            value: https://github.com/robwoolley/faux_test_results.git
+          - name: ZEPHYR_REPO_URL
+            value: https://github.com/zephyrproject-rtos/zephyr.git
+          resources:
+            limits:
+              cpu: 500m
+              memory: 500Mi
+          imagePullPolicy: Never
+          volumeMounts:
+          - mountPath: /data/zephyr
+            name: data-zephyr
+          - mountPath: /data/test_results
+            name: data-testresults
+      restartPolicy: Never
+      volumes:
+      - name: data-zephyr
+        persistentVolumeClaim:
+          claimName: zephyr-pvc
+      - name: data-testresults
+        persistentVolumeClaim:
+          claimName: testresults-pvc
+  backoffLimit: 1

@@ -1,0 +1,5 @@
+FOOTPRINT_REPO_PATH=/data/footprint_tracking
+FOOTPRINT_REPO_URL=https://github.com/robwoolley/footprint_tracking
+ZEPHYR_REPO_PATH=/data/zephyr
+ZEPHYR_REPO_URL=https://github.com/zephyrproject-rtos/zephyr.git
+INFLUX_DB=influxdb://192.168.10.17:8086/footprint_tracking

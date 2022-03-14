@@ -1,0 +1,788 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 2,
+  "iteration": 1615810680973,
+  "links": [],
+  "panels": [
+    {
+      "datasource": "zephyr_test_results",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 80
+              },
+              {
+                "color": "green",
+                "value": 90
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 7,
+        "x": 0,
+        "y": 0
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "value"
+      },
+      "pluginVersion": "7.4.3",
+      "targets": [
+        {
+          "groupBy": [],
+          "measurement": "builds",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "select ( \"passed\" / ( \"total\" - \"skipped\" )) * 100 from (SELECT \"skipped_count\" AS \"skipped\", \"success_count\" AS \"passed\", \"tests\" AS \"total\" FROM \"builds\" WHERE $timeFilter  AND \"version\" =~ /^$version$/ )",
+          "queryType": "randomWalk",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "skipped_count"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [
+                  "skipped"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "success_count"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [
+                  "passed"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "tests"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [
+                  "total"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Pass Rate ($version)",
+      "type": "stat"
+    },
+    {
+      "bgColor": null,
+      "colorScheme": "Group",
+      "datasource": "zephyr_test_results",
+      "decimal": 2,
+      "description": "",
+      "displayLabel": true,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "format": "short",
+      "gradientColors": [
+        "red",
+        "green"
+      ],
+      "gradientThresholds": "50,80",
+      "gridPos": {
+        "h": 12,
+        "w": 14,
+        "x": 7,
+        "y": 0
+      },
+      "groupDepthColors": [
+        "hsl(152,80%,80%)",
+        "hsl(228,30%,40%)"
+      ],
+      "groupSeperator": ",",
+      "height": 400,
+      "id": 21,
+      "mode": "time",
+      "nullPointMode": "connected",
+      "pluginVersion": "7.4.3",
+      "svgBubbleId": "svg_21",
+      "svgContainer": {},
+      "targets": [
+        {
+          "alias": "$tag_platform",
+          "groupBy": [
+            {
+              "params": [
+                "platform"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "builds",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "queryType": "randomWalk",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "failure_and_error_count"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "sum"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholdColors": [
+        "green",
+        "yellow",
+        "red"
+      ],
+      "thresholds": "50,80",
+      "title": "Platform/Failures",
+      "type": "digrich-bubblechart-panel",
+      "valueName": "current"
+    },
+    {
+      "aliasColors": {},
+      "breakPoint": "50%",
+      "cacheTimeout": null,
+      "combine": {
+        "label": "Others",
+        "threshold": 0
+      },
+      "datasource": "zephyr_test_results",
+      "fieldConfig": {
+        "defaults": {
+          "color": {},
+          "custom": {},
+          "thresholds": {
+            "mode": "absolute",
+            "steps": []
+          }
+        },
+        "overrides": []
+      },
+      "fontSize": "80%",
+      "format": "short",
+      "gridPos": {
+        "h": 6,
+        "w": 7,
+        "x": 0,
+        "y": 6
+      },
+      "id": 10,
+      "interval": null,
+      "legend": {
+        "show": true,
+        "values": true
+      },
+      "legendType": "Right side",
+      "links": [],
+      "nullPointMode": "connected",
+      "pieType": "pie",
+      "pluginVersion": "7.4.3",
+      "strokeWidth": 1,
+      "targets": [
+        {
+          "alias": "$tag_result",
+          "groupBy": [
+            {
+              "params": [
+                "result"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "tests",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "queryType": "randomWalk",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "name"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "version",
+              "operator": "=~",
+              "value": "/^$version$/"
+            },
+            {
+              "condition": "AND",
+              "key": "result",
+              "operator": "!=",
+              "value": "skipped"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Execution for All Platforms ($version)",
+      "type": "grafana-piechart-panel",
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "zephyr_test_results",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 50
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 21,
+        "x": 0,
+        "y": 12
+      },
+      "id": 19,
+      "interval": null,
+      "links": [],
+      "options": {
+        "displayMode": "lcd",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {}
+      },
+      "pluginVersion": "7.4.3",
+      "targets": [
+        {
+          "alias": "$tag_platform",
+          "groupBy": [
+            {
+              "params": [
+                "platform"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "builds",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"failure_and_error_count\" AS \"Failures\" FROM \"builds\" WHERE (\"version\" =~ /^$version$/) AND $timeFilter GROUP BY \"platform\" ",
+          "queryType": "randomWalk",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "failure_and_error_count"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [
+                  "Failures"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "version",
+              "operator": "=~",
+              "value": "/^$version$/"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Platform Failures",
+      "type": "bargauge"
+    },
+    {
+      "datasource": "zephyr_test_results",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "filterable": true
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Failed"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 105
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Passed"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 129
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Errored"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 145
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 21,
+        "x": 0,
+        "y": 22
+      },
+      "id": 15,
+      "options": {
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "7.4.3",
+      "targets": [
+        {
+          "alias": "$col",
+          "groupBy": [
+            {
+              "params": [
+                "platform"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "builds",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "select \"platform\" as \"Platform\", \"Failed\", \"Passed\", \"Errored\", \"Total\", \"Skipped\", (\"Passed\" / (\"Total\" - \"Skipped\") ) * 100 as \"Pass Rate (%)\" FROM (SELECT \"failure_count\" AS \"Failed\", \"success_count\" AS \"Passed\", \"error_count\" AS \"Errored\", \"skipped_count\" AS \"Skipped\", \"tests\" AS \"Total\" FROM \"builds\" WHERE (\"version\" =~ /^$version$/) AND $timeFilter GROUP BY \"platform\")",
+          "queryType": "randomWalk",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "failure_count"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [
+                  "Failures"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "success_count"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [
+                  "Success"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "error_count"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [
+                  "Errors"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "skipped_count"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [
+                  "Total"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "tests"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [
+                  "Skipped"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "version",
+              "operator": "=~",
+              "value": "/^$version$/"
+            }
+          ]
+        }
+      ],
+      "title": "Test Run Report ($version)",
+      "type": "table"
+    },
+    {
+      "datasource": "zephyr_test_results",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "result"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 109
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "classname"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 206
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": null
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 21,
+        "x": 0,
+        "y": 36
+      },
+      "id": 17,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Test Run Details",
+          "url": "https://testing.zephyrproject.org/daily_tests/$version/report/$platform.xml.html"
+        }
+      ],
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "result"
+          }
+        ]
+      },
+      "pluginVersion": "7.4.3",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "result"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "tests",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"classname\", \"name\" FROM \"tests\" WHERE ( \"result\" = 'failure' OR \"result\" = 'error') AND \"version\" =~ /^$version$/ AND $timeFilter GROUP BY \"result\"",
+          "queryType": "randomWalk",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "classname"
+                ],
+                "type": "field"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "name"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "result",
+              "operator": "=",
+              "value": "failure"
+            },
+            {
+              "condition": "OR",
+              "key": "result",
+              "operator": "=",
+              "value": "error"
+            },
+            {
+              "condition": "AND",
+              "key": "platform",
+              "operator": "=~",
+              "value": "/^$platform$/"
+            },
+            {
+              "condition": "AND",
+              "key": "version",
+              "operator": "=~",
+              "value": "/^$Version$/"
+            }
+          ]
+        }
+      ],
+      "title": "Failed Tests ($version)",
+      "type": "table"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 27,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "v2.5.0-rc1-104-g4ab6dd003ed0",
+          "value": "v2.5.0-rc1-104-g4ab6dd003ed0"
+        },
+        "datasource": "zephyr_test_results",
+        "definition": "SHOW TAG VALUES WITH KEY = \"version\" ",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "version",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"version\" ",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 2,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6M",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Test Results Overall",
+  "uid": "iag83qsGk",
+  "version": 6
+}

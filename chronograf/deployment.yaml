@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # namespace: monitoring
+  labels:
+    app: chronograf
+  name: chronograf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chronograf
+  template:
+    metadata:
+      labels:
+        app: chronograf
+    spec:
+      containers:
+        - name: chronograf
+          envFrom:
+          - secretRef:
+              name: influxdb-creds
+          image: chronograf:latest
+          ports:
+            - containerPort: 8888
+              name: server
+          resources:
+            limits:
+              cpu: 500m
+              memory: 500Mi
+          volumeMounts:
+          - mountPath: /var/lib/chronograf
+            name: var-lib-chronograf
+          # - mountPath: /etc/influxdb
+          #   name: config-volume
+      volumes:
+      - name: var-lib-chronograf
+        persistentVolumeClaim:
+          claimName: chronograf-pvc
+        

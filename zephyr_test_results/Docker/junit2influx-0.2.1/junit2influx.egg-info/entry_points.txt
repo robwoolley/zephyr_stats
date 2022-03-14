@@ -1,0 +1,4 @@
+[console_scripts]
+junit2influx = junit2influx.cli:junit_push
+push2influx = junit2influx.cli:push
+

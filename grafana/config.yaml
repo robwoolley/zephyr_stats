@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-configmap
+data:
+  grafana-plugins: "grafana-piechart-panel,digrich-bubblechart-panel"
