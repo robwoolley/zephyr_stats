@@ -27,7 +27,7 @@ for MF in $(reverse_word_order ${CHRONOGRAF_MF}); do
         echo "Could not find ${CHRONOGRAF_DIR}/${MF}.yaml"
         exit 1
     fi
-    kubectl apply -f${CHRONOGRAF_DIR}/${MF}.yaml
+    kubectl delete -f${CHRONOGRAF_DIR}/${MF}.yaml
 done
 
 # Grafana
