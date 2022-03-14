@@ -7,6 +7,15 @@ data:
   datasource.yaml: |
     apiVersion: 1
     datasources:
+    - name: footprint_tracking
+      type: influxdb
+      access: proxy
+      database: footprint_tracking
+      user: admin
+      password: password123
+      url: http://influxdb:8086
+      isDefault: false
+      editable: true
     - name: zephyr_test_results
       type: influxdb
       access: proxy
