@@ -120,9 +120,15 @@ kubectl create -f dashboard.admin-user.yml -f dashboard.admin-user-role.yml
 ```
 
 ### Get the Bearer Token
+```
 kubectl -n kubernetes-dashboard describe secret 
 kubectl -n kubernetes-dashboard describe secret admin-user-token-<k9-65r>
+```
 
+### Expose the Dashboard
+```
+kubectl proxy
+```
 Copy the token value for logging into the dashboard listed below.
 * http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
 
@@ -134,6 +140,12 @@ The Kubernetes resources are currently stored in separate manifest files.  The s
 NOTE: If Rancher Desktop is set to use Debian but your default WSL2 distro is Ubuntu, you may need to explicitly specify the WSL distro:
 ``` wsl -d Debian bash start.sh```
 
+## Creating
+Go into the Rancher Desktop app and forward the InfluxDB deployment to a local port. Then execute the following PowerShell commands, replacing the 51785 port number with the port number listed in the GUI for InfluxDB.
+```
+$postParams = @{q='CREATE DATABASE footprint_tracking'}
+Invoke-WebRequest -Uri http://127.0.0.1:51785/query -Method POST -Body $postParams
+```
 ## Zephyr Test Results
 
 See zephyr_test_results/README.md for details on how to deploy a pod to import the Zephyr Nightly Test Results into InfluxDB.
