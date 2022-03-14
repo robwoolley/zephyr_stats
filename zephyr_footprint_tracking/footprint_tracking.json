@@ -1,0 +1,614 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Tracking RAM/ROM footprint with multiple applications",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 10,
+  "iteration": 1647176153709,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "footprint_tracking",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "fill": 2,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 14,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 2,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.3.3",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "$measurement",
+          "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "kernel",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "board",
+              "operator": "=~",
+              "value": "/^$board$/"
+            },
+            {
+              "condition": "AND",
+              "key": "feature",
+              "operator": "=~",
+              "value": "/^$feature$/"
+            },
+            {
+              "condition": "AND",
+              "key": "type",
+              "operator": "=~",
+              "value": "/^$type$/"
+            },
+            {
+              "condition": "AND",
+              "key": "application",
+              "operator": "=~",
+              "value": "/^$application$/"
+            }
+          ]
+        },
+        {
+          "alias": "$measurement",
+          "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "measurement": "arch",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "board",
+              "operator": "=~",
+              "value": "/^$board$/"
+            },
+            {
+              "condition": "AND",
+              "key": "feature",
+              "operator": "=~",
+              "value": "/^$feature$/"
+            },
+            {
+              "condition": "AND",
+              "key": "type",
+              "operator": "=~",
+              "value": "/^$type$/"
+            },
+            {
+              "condition": "AND",
+              "key": "application",
+              "operator": "=~",
+              "value": "/^$application$/"
+            }
+          ]
+        },
+        {
+          "alias": "$measurement",
+          "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "measurement": "drivers",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "board",
+              "operator": "=~",
+              "value": "/^$board$/"
+            },
+            {
+              "condition": "AND",
+              "key": "feature",
+              "operator": "=~",
+              "value": "/^$feature$/"
+            },
+            {
+              "condition": "AND",
+              "key": "type",
+              "operator": "=~",
+              "value": "/^$type$/"
+            },
+            {
+              "condition": "AND",
+              "key": "application",
+              "operator": "=~",
+              "value": "/^$application$/"
+            }
+          ]
+        },
+        {
+          "alias": "$measurement",
+          "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "measurement": "lib",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "board",
+              "operator": "=~",
+              "value": "/^$board$/"
+            },
+            {
+              "condition": "AND",
+              "key": "feature",
+              "operator": "=~",
+              "value": "/^$feature$/"
+            },
+            {
+              "condition": "AND",
+              "key": "type",
+              "operator": "=~",
+              "value": "/^$type$/"
+            },
+            {
+              "condition": "AND",
+              "key": "application",
+              "operator": "=~",
+              "value": "/^$application$/"
+            }
+          ]
+        },
+        {
+          "alias": "$measurement",
+          "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "measurement": "subsys",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "board",
+              "operator": "=~",
+              "value": "/^$board$/"
+            },
+            {
+              "condition": "AND",
+              "key": "feature",
+              "operator": "=~",
+              "value": "/^$feature$/"
+            },
+            {
+              "condition": "AND",
+              "key": "type",
+              "operator": "=~",
+              "value": "/^$type$/"
+            },
+            {
+              "condition": "AND",
+              "key": "application",
+              "operator": "=~",
+              "value": "/^$application$/"
+            }
+          ]
+        },
+        {
+          "alias": "$measurement",
+          "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "measurement": "tests",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "board",
+              "operator": "=~",
+              "value": "/^$board$/"
+            },
+            {
+              "condition": "AND",
+              "key": "feature",
+              "operator": "=~",
+              "value": "/^$feature$/"
+            },
+            {
+              "condition": "AND",
+              "key": "type",
+              "operator": "=~",
+              "value": "/^$type$/"
+            },
+            {
+              "condition": "AND",
+              "key": "application",
+              "operator": "=~",
+              "value": "/^$application$/"
+            }
+          ]
+        },
+        {
+          "alias": "$measurement",
+          "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "measurement": "modules",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "G",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "board",
+              "operator": "=~",
+              "value": "/^$board$/"
+            },
+            {
+              "condition": "AND",
+              "key": "feature",
+              "operator": "=~",
+              "value": "/^$feature$/"
+            },
+            {
+              "condition": "AND",
+              "key": "type",
+              "operator": "=~",
+              "value": "/^$type$/"
+            },
+            {
+              "condition": "AND",
+              "key": "application",
+              "operator": "=~",
+              "value": "/^$application$/"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Footprint Tracking",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    }
+  ],
+  "schemaVersion": 34,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "altera_max10",
+          "value": "altera_max10"
+        },
+        "datasource": "footprint_tracking",
+        "definition": "SHOW TAG VALUES WITH KEY = \"board\" ",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Board",
+        "multi": false,
+        "name": "board",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"board\" ",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "footprints",
+          "value": "footprints"
+        },
+        "datasource": "footprint_tracking",
+        "definition": "SHOW TAG VALUES WITH KEY = \"application\" ",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Application",
+        "multi": false,
+        "name": "application",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"application\" ",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "default",
+          "value": "default"
+        },
+        "datasource": "footprint_tracking",
+        "definition": "SHOW TAG VALUES WITH KEY = \"feature\" ",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Feature",
+        "multi": false,
+        "name": "feature",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"feature\" ",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "ram",
+          "value": "ram"
+        },
+        "datasource": "footprint_tracking",
+        "definition": "SHOW TAG VALUES WITH KEY = \"type\" ",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Type",
+        "multi": false,
+        "name": "type",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"type\" ",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-30d",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "Footprint Tracking",
+  "uid": "SSxr5P6Gk",
+  "version": 12,
+  "weekStart": ""
+}
